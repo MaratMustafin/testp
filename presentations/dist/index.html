@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>Презентация - защита</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+		<!-- <link type="text/css" rel="stylesheet" href="main.css"> -->
+		
+
+		<style>
+			body {
+				display: flex;
+			}
+			.pcd-container {
+				width: 400px;
+				height: 300px;
+				margin: 10px;
+			}
+			.purpose {
+				font-size: 32px;
+				float: left;
+			}
+			.title {
+				display: grid;
+			}
+			.literature_review {
+				font-size: 18px;
+			}
+			.body {
+				font-size: 28px;
+			}
+			.research {
+				float: right;
+				margin: 0.5em;
+			}
+			.traditional {
+				font-size: 34px;
+			}
+			.ending {
+				font-size: 34px;
+			}
+			.container {
+			display: grid;
+			grid-template-columns: repeat(3, 1fr);
+			grid-template-rows: repeat(2, 1fr); 
+			grid-gap: 15px; 
+			}
+
+			.item {
+			background-color: #f2f2f2; 
+			/* padding: 20px;  */
+			text-align: center; 
+			}
+			.container-ae {
+			display: grid;
+			grid-template-columns: 1fr; /* 1 колонка */
+			grid-template-rows: auto auto; /* 2 строки с автоматической высотой */
+			grid-gap: 10px; /* расстояние между элементами */
+			}
+
+			.item-ae {
+			background-color: #f2f2f2; /* цвет фона элементов */
+			padding: 20px; /* отступы внутри элементов */
+			text-align: center; /* выравнивание содержимого по центру */
+			}
+
+			.item-ae img {
+			max-width: 100%; /* максимальная ширина изображений внутри элементов */
+			max-height: 100%; /* максимальная высота изображений внутри элементов */
+			}
+			.grid-container {
+			display: grid;
+			justify-content: center;
+  align-items: center;
+			grid-template-columns: repeat(3, 1fr);
+			grid-template-rows: auto;
+			gap: 10px;
+			}
+
+			.grid-item {
+			background-color: #f1f1f1;
+			padding: 10px;
+			width: 400px;
+			height: 300px;
+			margin: 10px;
+			}
+
+		</style>
+		<script type="importmap">
+			{
+				"imports": {
+					"three": "../build/three.module.js",
+					"three/addons/": "./jsm/"
+				}
+			}
+		</script>
+		<script type="module" crossorigin src="./assets/index-267c73f8.js"></script>
+		<link rel="stylesheet" href="./assets/index-ce8f7ca9.css">
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+				<section>
+					<h4>Создание  метода 
+					для мульти кадровой реконструкции изображения
+					с помощью обучения с подкреплением подкрепленным GAN. </h4>
+					<div class="title">
+						<div><b>магистрант:</b>Мустафин Марат</div>
+						<div><b>научный руководитель:</b>Олжас Турар</div>
+						<div><b>группа:</b> ADA 2102M</div>
+					</div>
+				</section>
+				<section>
+					<b>Актуальность</b>
+					<div class="body">
+						Комбинирования нескольких спосов тренировки моделей, включает в себе различные плюсы, такие как высокая скорость обработки больших данных и другие.
+						Старые исследования хоть и показывают отличные результаты в реконструкции изображения, 
+						однако использование обучения с подкреплением дает, некоторые плюсы, такие как быстрая обработка больших данных при низких вычислительных затратах.
+						<div class="research"><b>Объект исследования:</b> Сочетание генеративно-состязательных сетей , автоэнкодеров и обучения с подкреплением в контексте задачи реконструкции изображения и генерации трехмерной модели.</div>
+						<div class="research"><b>Предмет исследования:</b> Разработка метода мульти кадровой реконструкции на основе обучения с подкреплением подкрепленным GAN в задачах восстановления трехмерной структуры изображений.</div>
+					</div>
+				</section>
+				<section>
+					<b>Актуальность</b>
+					<img src="./assets/main_process-5405e765.png" width="800px" height="300px">
+				</section>
+				<section class="purpose">
+					<b>Цели</b>
+					<ul>
+						<li><div>Изучение эффективности сочетания автокодировщика и генеративно-состязательной сети вместе с обучением с подкреплением для реконструкции изображений.</div></li>
+						<li><div>Построение архитектуры сетей и алгоритмов для улучшения качества реконструкции.</div></li>
+						<li><div>Оценка влияния различных гиперпараметров на качество реконструкции и скорость сходимости моделей.</div></li>
+						<li><div>Сравнение предложенного подхода с существующими методами реконструкции.</div></li>
+						<li><div>Исследование влияния объема и разнообразия обучающих данных на результаты реконструкции.</div></li>
+					</ul>
+				</section>
+				<section>
+					<b>Новизна</b>
+					<div>Данное исследование представляет метод к задаче реконструкции изображений, основанный на сочетании генеративно-состязательных сетей, автоэнкодеров и обучения с подкреплением.</div>
+				</section>
+				<section>
+					<b>Литературный обзор</b>
+					<table class="literature_review">
+						<thead>
+							<tr>
+								<th>Работа</th>
+								<th>Метод</th>
+								<th>Результат</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>Modeling 3D Shapes by Reinforcement Learning</td>
+								<td>Prim-Agent и MeshAgent, где совместно объединяет эвристические политики, IL и RL</td>
+								<td>Агент который генерирует примитивы, а затем геометрические формы</td>
+							</tr>
+							<tr>
+								<td>Next-Best View Policy for 3D Reconstruction</td>
+								<td>Основан на обучении с подкреплением для обучения политики NBV для 3D-реконструкции.</td>
+								<td>96% охвата.</td>
+							</tr>
+							<tr>
+								<td>RL-GAN-Net<br>
+									Muhammad Sarmad, Hyunjoo Jenny Lee, Young Min Kim</td>
+								<td>RL + GAN.</td>
+								<td>~70 %</td>
+							</tr>
+							<tr>
+								<td>3D Recurrent Reconstruction Neural Network</td>
+								<td>Рекуррентное моделирование</td>
+								<td>IoU 0.591</td>
+							</tr>
+							<tr>
+								<td>3D-LMNet </td>
+								<td>a latent embedding matching approach for 3D reconstruction</td>
+								<td>EMD 7.0</td>
+							</tr>
+							<tr>
+								<td>Multi View Object Reconstruction</td>
+								<td>PointNet + MLP</td>
+								<td>IoU 0.250</td>
+							</tr>
+						</tbody>
+					</table>
+				</section>
+				<section>
+					<b>Постановка проблемы</b>
+					<div class="container">
+						<div class="item"><b>Входные данные:</b></div>
+						<div class="item">ShapeNet, MySimpleDataset, JSON</div>
+						<div class="item"> <img src="./assets/cars-240247c9.jpg" width="100px" height="100px" /><img src="./assets/shapenet2-53ce9221.png" width="100px" height="100px" /><img src="./assets/shapenet-9488600c.png" width="100px" height="100px" /></div>
+						<div class="item"><b>Выходные данные:</b></div>
+						<div class="item">Облако точек</div>
+						<div class="item"><img src="./assets/car1-3a077d0f.png" width="100px" height="100px" /><img src="./assets/car2-0174eb31.png" width="100px" height="100px" /><img src="./assets/car3-62cf7430.png" width="100px" height="100px" /><img src="./assets/car4-16e61a7a.png" width="100px" height="100px" /></div>
+					  </div>
+					<!-- <div class="input-output">
+						<div class="input"><b>Входные данные:</b> ShapeNet, MyMinimalDataset, JSON <img src="cars.jpg" width="100px" height="100px" /></div>
+						<div class="output"><b>Выходные данные:</b> XYZ  <img src="car1.png" width="100px" height="100px" /><img src="car2.png" width="100px" height="100px" /><img src="car3.png" width="100px" height="100px" /><img src="car4.png" width="100px" height="100px" /></div>
+					</div> -->
+				</section>
+			  <section>
+				<section class="traditional">
+					<b>Традиционыне способы реконструкции</b>
+					<ul>
+						<li>Space Carving значимость заключается в том, что он позволяет создавать точные и детализированные 3D-модели объектов на основе набора 2D-изображений, что является важным преимуществом по сравнению с другими методами.</li>
+						<li>Voxel Coloring - это алгоритм, который позволяет создавать трехмерные модели объектов на основе набора 2D-изображений.</li>
+						<li>SfM - это метод компьютерного зрения для построения трехмерной модели сцены по набору изображений.</li>
+					</ul>
+				</section>
+
+				<section>
+					<b>Процесс реконструкции изображения на основе N-данных с помощью метода SfM</b>
+					<img src="./assets/naberjrecon-c0d99800.png" width="1000px" height="500px">
+				</section>
+			  </section>
+			  <section>
+				<section>
+					<h3>Создание датасета</h3>
+					<img src="./assets/dataset-38abbae5.png" width="1000px" height="500px">
+				</section>
+			  </section>
+			  <section>
+				<h3>Методология</h3>
+				<div class="r-stack">
+					<img class="fragment fade-out" data-fragment-index="0" src="./assets/process1-b312cbc0.png" width="200%" height="200%">
+					<img class="fragment current-visible" data-fragment-index="0" src="./assets/process2-6badd292.png" width="200%" height="200%">
+					<img class="fragment current-visible" data-fragment-index="0" src="./assets/process3-9d931475.png" width="200%" height="200%">
+					<img class="fragment" src="./assets/process4-0f91e60e.png" width="200%" height="200%">
+				  </div>
+			  </section>
+			  <section>
+				<section>
+					<h3>Автокодировщик</h3>
+					<img src="./assets/Untitled2-d9e2cfcc.png" width="1000px" height="500px">
+				</section>
+				<section>
+					<div class="container-ae">
+						<div class="item-ae">
+							<h2>Класс модели</h2>
+							<table class="literature_review">
+								<thead>
+									<tr>
+										<th>Слои</th>
+										<th>Исходящие данные</th>
+										<th>Параметры</th>
+										<th>Активация</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td>$Conv1d$</td>
+										<td>$[-1, 64, 2048]$</td>
+										<td>$256$</td>
+										<td>$ReLU$</td>
+									</tr>
+									<tr>
+										<td>$Conv1d$</td>
+										<td>$[-1, 128, 2048]$</td> 
+										<td>$8,320$</td>
+										<td>$ReLU$</td>
+									</tr>
+									<tr>
+										<td>$Conv1d$</td>   <td>$[-1, 256, 2048]$</td>  <td>$65,792$</td>  <td>$ReLU$</td> 
+									</tr>
+									<tr>
+										<td>$Conv1d$</td>   <td>$[-1, 1024, 2048]$</td>  <td>$253,168$</td>  <td>$ReLU$</td> 
+									</tr>
+									<tr>
+										<td>$Lineaar$</td>   <td>$[-1, 128]$</td>  <td>$131,200$</td>  <td>$-$</td> 
+									</tr>
+								</tbody>
+							</table>
+						</div>
+						<div class="r-stack item-ae">
+							<img class="fragment current-visible" src="./assets/ae1-8a779980.png" >
+							<img class="fragment current-visible" src="./assets/ae2-510b84ac.png">
+							<img class="fragment current-visible" src="./assets/ae3-d22825b7.png">
+							<img class="fragment current-visible" src="./assets/ae4-b894e513.png">
+							<img class="fragment current-visible" src="./assets/ae5-728eb5c7.png">
+							<img class="fragment current-visible" src="./assets/ae6-5ac1cf9d.png">
+							<img class="fragment current-visible" src="./assets/ae7-3f728fad.png">
+							<img class="fragment current-visible" src="./assets/ae8-35841ff2.png">
+							<img class="fragment" src="./assets/ae-full-fbc3d93f.png">
+						</div>
+					  </div>
+				</section>
+				<section>
+					<h3>Метрики и визуализация сходства</h3>
+					<img src="./assets/Image-333ee28a.png" width="1000px" height="500px">
+				</section>
+				<section>
+					<h3>Результаты исследования</h3>
+					<table class="literature_review">
+						<thead>
+						  <tr>
+							<th>Модель</th>
+							<th>CE loss</th>
+							<th>Chamfer Loss</th>
+							<th>IoU</th>
+							<th>R2N2</th>
+						  </tr>
+						</thead>
+						<tbody>
+						  <tr>
+							<td>кружка</td>
+							<td>0.0087</td>
+							<td>0.0028</td>
+							<td>0.3498</td>
+							<td>-</td>
+						  </tr>
+						  <tr>
+							<td>ноутбук</td>
+							<td>0.0072</td>
+							<td>0.0028</td>
+							<td>0.2246</td>
+							<td>-</td>
+						  </tr>
+						  <tr>
+							<td>монитор</td>
+							<td>0.0070</td>
+							<td>0.0023</td>
+							<td>0.1986</td>
+							<td><strong>0.565</strong></td>
+						  </tr>
+						  <tr>
+							<td>мобильник</td>
+							<td>0.0051</td>
+							<td>0.0021</td>
+							<td>0.2256</td>
+							<td><strong>0.661</strong></td>
+						  </tr>
+						  <tr>
+							<td>балончик</td>
+							<td>0.00101</td>
+							<td>0.0035</td>
+							<td>0.2906</td>
+							<td>-</td>
+						  </tr>
+						  <tr>
+							<td>камера</td>
+							<td>0.0135</td>
+							<td>0.0072</td>
+							<td>0.2098</td>
+							<td>-</td>
+						  </tr>
+						  <tr>
+							<td>бутылка</td>
+							<td>0.0051</td>
+							<td>0.0023</td>
+							<td>0.2278</td>
+							<td>-</td>
+						  </tr>
+						  <tr>
+							<td>машина</td>
+							<td>0.076</td>
+							<td>0.0038</td>
+							<td>0.2734</td>
+							<td><strong>0.6999</strong></td>
+						  </tr>
+						</tbody>
+					  </table>
+					  
+				</section>
+				<section>
+					<h3>Сгенерированные данные</h3>
+					<img src="./assets/Untitled4-26c09eaa.png" width="1000px" height="500px">
+				</section>
+			  </section>
+			  <section>
+				<section>
+					<b>Генеративно состязательная сеть</b>
+					<img src="./assets/Untitled9-fcdcbfc3.png" width="1000px" height="500px">
+				</section>
+				<section>
+					<b>lGAN - работа 2017 года для работы со скрытым пространством</b><br>
+					<p>Результаты</p>
+					<img src="./assets/lgan-4438ac33.png" width="1000px" height="500px">
+				</section>
+				<section>
+					<div class="container-ae">
+						<div class="item-ae">
+							<h2>Класс генератора</h2>
+							<table class="literature_review">
+								<thead>
+								  <tr>
+									<th>Слои</th>
+									<th>Исходящие данные</th>
+									<th>Параметры</th>
+									<th>Нормализация</th>
+								  </tr>
+								</thead>
+								<tbody>
+								  <tr>
+									<td>$ConvTranspose2d$</td>
+									<td>$[-1, 256, 4, 4]$</td>
+									<td>$20,736$</td>
+									<td>$BatchNorm$</td>
+								  </tr>
+								  <tr>
+									<td>$ConvTranspose2d$</td>
+									<td>$[-1, 128, 5, 5]$</td>
+									<td>$295,040$</td>
+									<td>$BatchNorm$</td>
+								  </tr>
+								  <tr>
+									<td>$ConvTranspose2d$</td>
+									<td>$[-1, 64, 7, 7]$</td>
+									<td>$73,792$</td>
+									<td>$BatchNorm$</td>
+								  </tr>
+								  <tr>
+									<td>Слой самовнимания</td>
+									<td>$[]$</td>
+									<td>$-$</td>
+									<td>$-$</td>
+								  </tr>
+								  <tr>
+									<td>$ConvTranspose2d$</td>
+									<td>$[-1, 1, 12, 12]$</td>
+									<td>$257$</td>
+									<td>$-$</td>
+								  </tr>
+								  <tr>
+									<td>$ConvTranspose1d$</td>
+									<td>$[-1, 128, 1]$</td>
+									<td>$18,560$</td>
+									<td>$-$</td>
+								  </tr>
+								</tbody>
+							  </table>
+							  
+						</div>
+						<div class="r-stack item-ae">
+							<img class="fragment current-visible" src="./assets/gen1-876aef83.png" >
+							<img class="fragment current-visible" src="./assets/gen2-2602d96a.png">
+							<img class="fragment current-visible" src="./assets/gen3-4de8a9c4.png">
+							<img class="fragment current-visible" src="./assets/gen4-c97dc7e1.png">
+							<img class="fragment current-visible" src="./assets/gen5-7a2aed0f.png">
+							<img class="fragment current-visible" src="./assets/gen6-867c6245.png">
+							<img class="fragment current-visible" src="./assets/gen7-c000ed56.png">
+							<img class="fragment current-visible" src="./assets/gen8-dfea5cdd.png">
+							<img class="fragment current-visible" src="./assets/sagan1-eb477030.png">
+							<img class="fragment" src="./assets/gen10-89143d23.png">
+						</div>
+					  </div>
+				</section>
+				<section>
+					<div class="container-ae">
+						<div class="item-ae">
+							<h2>Класс дискриминатора</h2>
+							<table class="literature_review">
+								<thead>
+								<tr>
+									<th>Слои</th>
+									<th>Исходящие данные</th>
+									<th>Параметры</th>
+									<th>Активизация</th>
+								</tr>
+								</thead>
+								<tbody>
+								<tr>
+									<td>ConvTranspose1d</td>
+									<td>[-1, 144, 1]</td>
+									<td>18,576</td>
+									<td>-</td>
+								</tr>
+								<tr>
+									<td>Слой самовнимания</td>
+									<td>[]</td>
+									<td>-</td>
+									<td>-</td>
+								</tr>
+								<tr>
+									<td>Conv2d</td>
+									<td>[-1, 64, 7, 7]</td>
+									<td>640</td>
+									<td>-</td>
+								</tr>
+								<tr>
+									<td>Conv2d</td>
+									<td>[-1, 128, 5, 5]</td>
+									<td>73,856</td>
+									<td>LeakyReLU</td>
+								</tr>
+								<tr>
+									<td>Conv2d</td>
+									<td>[-1, 256, 4, 4]</td>
+									<td>295,168</td>
+									<td>LeakyReLU</td>
+								</tr>
+								<tr>
+									<td>Conv2d</td>
+									<td>[-1, 1, 1, 1]</td>
+									<td>4,097</td>
+									<td>LeakyReLU</td>
+								</tr>
+								</tbody>
+							</table>
+					  </div>
+					  <div class="item-ae">
+						<div class="r-stack item-ae">
+							<img class="fragment current-visible" src="./assets/disc1-f9380c3f.png" >
+							<img class="fragment current-visible" src="./assets/disc2-ec7929b1.png">
+							<img class="fragment current-visible" src="./assets/disc3-559b6527.png">
+							<img class="fragment current-visible" src="./assets/disc4-778018e8.png">
+							<img class="fragment current-visible" src="./assets/disc5-b8cec316.png">
+							<img class="fragment current-visible" src="./assets/discsagan-cc25ea45.png">
+							<img class="fragment" src="./assets/discfull-6fa530bc.png">
+						</div>
+					  </div>
+					</div>
+					  
+				</section>
+				<section>
+					<b>SAGAN - работа 2019 года</b><br>
+					<p>Результаты</p>
+					<img src="./assets/SAGAN1-64d09ee2.png" width="1000px" height="500px">
+				</section>
+			  </section>
+			  <section>
+				<section>
+					<b>Обучение с подкреплением</b>
+					<img src="./assets/UntitledRL-0c6bb296.png" width="1000px" height="500px">
+				</section>
+				<section>
+					<b>Формула подсчета награды</b>
+					<section data-markdown>
+						`$$ \text{награда} = -\text{CD} \times 5.0 + \text{DISC} \times 0.1 + (-\|\text{OPTIMAL}\|) \times 0.1 $$`
+					</section>	
+					<div>
+						<ul>
+							<li>
+								<b>CD</b> - это дистанция чамфера, которая вычисляет разность, между исходными и сгенерированными данными
+							</li>
+							<li><b>DISC</b> - дискриминатор</li>
+							<li><b>OPTIMAL</b> -  оптимальное значение полученные с помощью алгоритма и умноженное на шум в диапазоне от -2 до 2.</li>
+						</ul>
+				</section>
+				<section>
+					<b>Результаты исследования</b>
+					<p>Исследования показали, что использование обучения с подкреплением, подкрепленным GAN позволят генерировать доп ~20% облака точек.</p>
+					<img src="./assets/RewardRL-c759ec43.png" width="1000px" height="500px">
+				  </section>
+			  </section>
+			  <section>
+				<section>
+					<b>Общие результаты</b>
+					<div class="grid-container">
+						<div class="grid-item" id="pcd-container1"></div>
+						<div class="grid-item" id="pcd-container2"></div>
+						<div class="grid-item" id="pcd-container3"></div>
+					  </div>
+				</section>
+				<section>
+					<b>Общие результаты</b>
+					<div class="grid-container">
+						<div class="grid-item" id="pcd-container4"></div>
+						<div class="grid-item" id="pcd-container5"></div>
+						<div class="grid-item" id="pcd-container6"></div>
+					  </div>
+				</section>
+				<section>
+					<b>Общие результаты</b>
+					<div class="grid-container">
+						<div class="grid-item" id="pcd-container7"></div>
+						<div class="grid-item" id="pcd-container8"></div>
+						<div class="grid-item" id="pcd-container9"></div>
+					  </div>
+				</section>
+				<section>
+					<b>Общие результаты</b>
+					<div class="grid-container">
+						<div class="grid-item" id="pcd-container10"></div>
+						<div class="grid-item" id="pcd-container11"></div>
+						<div class="grid-item" id="pcd-container12"></div>
+					  </div>
+				</section>
+				
+			  </section>
+			  <section class="ending">
+				<b>Заключение</b>
+				<ul>
+					<li>Были изучены традиционыне методы реконструкции</li>
+					<li>Создано веб приложение для генерации 3д моделей</li>
+					<li>Реализован комбинированный метод для реконструкции</li>
+				</ul>
+				<!-- <div>В заключение, данная работа рассмотрела тему мультикадровой реконструкции с использованием обучения с подкреплением, подкрепленного генеративно-состязательными сетями. Исследование представило метод к реконструкции последовательности кадров, основанный на совместном использовании обучения с подкреплением и GAN-архитектуры.
+
+					Путем комбинирования обучения с подкреплением и GAN, получилось достигнуть прогресса в точности восстановления мультикадровых сцен. Применение обучения с подкреплением позволило модели сделать осмысленные выводы на основе обратной связи и улучшить качество реконструкции с учетом контекста последовательности кадров.</div> -->
+			  </section>
+			  <section>
+				Спасибо за просмотр!
+			  </section>
+			</div>
+		  </div>
+		<script async src="https://unpkg.com/es-module-shims@1.6.3/dist/es-module-shims.js"></script>
+		<script src="../socket.io/socket.io.js"></script>
+		<script src="../_remote/plugin.js"></script>
+		<script src="../_remote/remotezoom.js"></script>
+
+		<script>
+
+			// Also available as an ES module, see:
+			// https://revealjs.com/initialization/
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				center: true,
+				hash: true,
+
+				/*
+					reveal.js-remote:
+					optional configuration (with default values)
+				*/
+				remote: {
+					// enable remote control
+					remote: true,
+
+					// enable multiplexing
+					multiplex: true,
+
+					// server address
+					// change this if you do not serve the presentation from the same domain
+					// example: https://presentations.jowisoftware.de
+					server: window.location.protocol + "//" + window.location.host + "/",
+
+					// path to socket.io
+					// change this if the basepath of the server is not "/"
+					path: "/socket.io",
+
+                    // url of the presentation to share
+                    shareUrl: window.location.href
+				},
+
+				// Learn about plugins: https://revealjs.com/plugins/
+				plugins: [ RevealRemoteZoom, RevealNotes, RevealSearch, RevealMarkdown, RevealHighlight, RevealRemote ]
+			});
+
+		</script>
+
+
+		
+
+
+
+	</body>
+</html>
